@@ -1,0 +1,4 @@
+[11-May-2015 16:54:51 UTC] PHP Fatal error:  Class 'Form' not found in /home/marketingpublico/public_html/campaign/storage/framework/views/5fa56db4a0c66de3b992233c374c0b7c on line 47
+[11-May-2015 17:12:27 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/marketingpublico/public_html/campaign/storage/framework/views/5fa56db4a0c66de3b992233c374c0b7c on line 47
+[11-May-2015 22:22:31 UTC] PHP Parse error:  syntax error, unexpected '?>' in /home/marketingpublico/public_html/campaign/storage/framework/views/5fa56db4a0c66de3b992233c374c0b7c on line 60
+[11-May-2015 22:22:33 UTC] PHP Parse error:  syntax error, unexpected '?>' in /home/marketingpublico/public_html/campaign/storage/framework/views/5fa56db4a0c66de3b992233c374c0b7c on line 60

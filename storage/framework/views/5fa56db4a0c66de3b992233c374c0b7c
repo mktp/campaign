@@ -48,78 +48,147 @@
 		<link rel="stylesheet" href="api/bootstrap/css/bootstrap-responsive.css">
 		<link rel="stylesheet" href="api/bootstrap/css/docs.css">
 		<link rel="stylesheet" href="api/bootstrap/css/prettify.css">
-		
-<script type="text/javascript">
 
-	function changeMy() {
+<!-- javascript -->	
+		<script type="text/javascript">
+
+			var quotesL = <?php echo count($quotes); ?>; //tamaño set quotes
+			var quotes = new Array();
+			var myQuote = null;
+			var i = 0;
+			var total = 0;
+			
+			<?php
+			
+				$i = 0;
+				do  {
+			?>	
+					//alert("<?php echo $quotecomputes[$i][0]->name; ?>");
+					myQuote = <?php echo json_encode($quotecomputes[$i]); ?>;
+					quotes[i] = myQuote;
+					i++;
+			<?php
+			
+					$i++;
+				} while ( $i < count($quotes) );
+			?>
+
+		function changeTotal(text, product) {
 	
-		//alert("el check quedo en " + $('#do_sem').prop("checked"));
-		if ( $('#do_sem').prop("checked") ) {
-		
-			$('#l_total').html( parseInt($('#domain').val()) + parseInt($('#server').val()) + parseInt($('#mail').val()) + parseInt($('#sem').val()) );
-		} else {
-		
-			$('#l_total').html( parseInt($('#domain').val()) + parseInt($('#server').val()) + parseInt($('#mail').val()) );		
+			var selectBox = document.getElementById("quotemodel");
+			var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+			if ( $('#add_' + text).prop("checked") ) {
+			
+				total += quotes[selectedValue - 1][product].price;
+				$('#add_' + text).prop("value", 1);
+			} else {
+			
+				total -= quotes[selectedValue - 1][product].price;
+				$('#add_' + text).prop("value", 0);
+			}
+			$('#l_total').html("TOTAL: $" + total);
 		}
-	}
-
-	function proyectar() {
 	
-		//alert("proyectando a " + $('#meses').val() + " meses");
-		var i;
-		$("#modal_entidad").empty();
-		for ( i = 0; i < parseInt($('#meses').val()); i++ ) {
+		function proyectar() {
 		
-			$("#modal_entidad").append("<br/><p>Mes " + (i + 1) + ": " + parseInt($('#l_total').html()) * (i + 1) + "</p>")
+			var i;
+			$("#modal_entidad").empty();
+			for ( i = 0; i < parseInt($('#meses').val()); i++ ) {
+			
+				$("#modal_entidad").append("<br/><p>Mes " + (i + 1) + ": " + (total * (i + 1)) + "</p>")
+			}
 		}
+
+		function changeQuote() {
 		
-	}
+			var selectBox = document.getElementById("quotemodel");
+			var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+			$("#q_hidden").val(selectedValue);
+			var i;
+			var product = "";
+			$("#product").empty();
+			for ( i = 0; i < quotes[selectedValue - 1].length; i++ ) {
+			
+				if (quotes[selectedValue - 1][i].required == 0) {
+				
+					product = "<input type='checkbox' id='add_" + quotes[selectedValue - 1][i].name + "' name='add_" + quotes[selectedValue - 1][i].name + "' value='0' onclick='changeTotal(\""  +  quotes[selectedValue - 1][i].name + "\"," + i + ");' />";
+				} else {
+				
+					product = "";
+					total += quotes[selectedValue - 1][i].price;
+				}
+				product = product + "<input type='hidden' id='" + quotes[selectedValue - 1][i].name.toLowerCase() + "' name='" + quotes[selectedValue - 1][i].name.toLowerCase() + "'value='" + 
+					quotes[selectedValue - 1][i].price + 
+					"'><label id='l_" + quotes[selectedValue - 1][i].name + "'>" + 
+					quotes[selectedValue - 1][i].name + ": $" + quotes[selectedValue - 1][i].price + "</label><br/>";			
+				$("#product").append(product);
+			}
+			$("#product").append("<label id='l_total'>TOTAL: $" + total + "</label>");
+		}
 
-</script>
-
+		$( document ).ready(function() { changeQuote(); });
+		
+		</script>
+		
 
 		<div class="container">
 			<div class="content">
-				<div class="title">Laravel 5 4 William</div>
+
+				<div class="title">Cotizador interactivo</div>
 				<div class="quote"><?php echo e(Inspiring::quote()); ?></div>
 
-								<div>
-									<input type="hidden" id="domain" value="64000">
-									<input type="hidden" id="server" value="25000">
-									<input type="hidden" id="mail" value="6000">
-									<input type="hidden" id="sem" value="1000000">
-									<label id="l_domain">Dominio: $64000</label><br/>
-									<label id="l_server">Servidor: $25000</label><br/>
-									<label id="l_mail">Correo: $6000</label><br/>
-									<input type="checkbox" id="do_sem" onclick="changeMy();"/>
-									SEM: $1000000<br/>
-									<label id="l_total">95000</label>
+				<?php echo Form::open(array('route' => 'current_quote', 'class' => 'form')); ?>
+
+
+					<input type='hidden' id='q_hidden' name='q_hidden'/>
+					<select id='quotemodel' onchange="changeQuote();">
+						<option value=1>Pymes</option>
+						<option value=2>Grandes</option>
+					</select>
+
+					<div id="product">
+					</div>
+
+					<div id="more">
+
 						<?php echo Form::label('Proyectando a '); ?>
 
-						<input type="text" id="meses" placeholder="meses">
+						<input type="text" id="meses" placeholder="meses">	
+						
+							<br/><a class="pull-left" href="#modal_entidad" data-target="#modal_entidad" data-toggle="modal" onclick="proyectar();">
+							<span>Proyectar</span>
+						</a>
+						<p onclick="window.location.href = 'design/' + $('#l_total').html();">Diseños</p>
+					
+					
+					</div>
 
-				<br/><a class="pull-left" href="#modal_entidad" data-target="#modal_entidad" data-toggle="modal" onclick="proyectar();">
-					<span>Proyectar</span>
-				</a>
+					<?php echo Form::text('client', null, 
+						array('required', 
+							  'class'=>'form-control', 
+							  'placeholder'=>'Escriba el nombre del cliente')); ?>
 
-									<p onclick="window.location.href = 'design/' + $('#l_total').html();">Diseños</p>
+					<div class="form-group">
+						<?php echo Form::submit('Go', 
+						  array('class'=>'btn btn-primary')); ?>
 
+					</div>
+				<?php echo Form::close(); ?>
 
-								</div>
 
 			</div>
 		</div>
 
 <!-- MODAL -->
-			<div id="modal_entidad" class="modal" role="dialog" tabindex="-1" data-width="420px" aria-labelledby="myModalLabel" style="display: none; top:120px; ">
-			  <div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" >×</button>
-				<h3 id="myModalLabel" >Proyeccion</h3>
-			  </div>
-			  
-				<a class="pull-left" href="http://www.projectrevista.com">Bombon</a>
+		<div id="modal_entidad" class="modal" role="dialog" tabindex="-1" data-width="420px" aria-labelledby="myModalLabel" style="display: none; top:120px; ">
 
-			</div>
+		  <div class="modal-header">
 
+			<button type="button" class="close" data-dismiss="modal" >×</button>
+			<h3 id="myModalLabel" >Proyeccion</h3>
+		  </div>
+		  
+			<a class="pull-left" href="http://www.projectrevista.com">Bombon</a>
+		</div>
 	</body>
 </html>

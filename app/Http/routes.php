@@ -22,3 +22,7 @@ Route::controllers([
 
 Route::get('hola', 'WelcomeController@hola');
 Route::get('design/{total}', 'WelcomeController@design');
+
+Route::post	('current_quote', ['as' => 'current_quote', 'uses' => 'WelcomeController@save_quote']);
+Route::get('which_client', 'WelcomeController@which_client');
+Route::post	('which_client_go', ['as' => 'which_client_go', 'uses' => 'WelcomeController@which_client_go']);

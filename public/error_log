@@ -2,3 +2,15 @@
 [11-May-2015 17:12:27 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/marketingpublico/public_html/campaign/storage/framework/views/5fa56db4a0c66de3b992233c374c0b7c on line 47
 [11-May-2015 22:22:31 UTC] PHP Parse error:  syntax error, unexpected '?>' in /home/marketingpublico/public_html/campaign/storage/framework/views/5fa56db4a0c66de3b992233c374c0b7c on line 60
 [11-May-2015 22:22:33 UTC] PHP Parse error:  syntax error, unexpected '?>' in /home/marketingpublico/public_html/campaign/storage/framework/views/5fa56db4a0c66de3b992233c374c0b7c on line 60
+[12-May-2015 20:03:50 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/marketingpublico/public_html/campaign/storage/framework/views/5fa56db4a0c66de3b992233c374c0b7c on line 114
+[14-May-2015 22:17:19 UTC] PHP Parse error:  syntax error, unexpected ':' in /home/marketingpublico/public_html/campaign/app/Http/Controllers/WelcomeController.php on line 64
+[14-May-2015 22:17:41 UTC] PHP Parse error:  syntax error, unexpected ':' in /home/marketingpublico/public_html/campaign/app/Http/Controllers/WelcomeController.php on line 64
+[14-May-2015 22:44:52 UTC] PHP Parse error:  syntax error, unexpected '"client"' (T_CONSTANT_ENCAPSED_STRING), expecting ']' in /home/marketingpublico/public_html/campaign/app/Http/Controllers/WelcomeController.php on line 73
+[14-May-2015 23:12:55 UTC] PHP Parse error:  syntax error, unexpected '"required"' (T_CONSTANT_ENCAPSED_STRING), expecting ']' in /home/marketingpublico/public_html/campaign/app/Http/Controllers/WelcomeController.php on line 82
+[15-May-2015 15:51:18 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/marketingpublico/public_html/campaign/app/Http/Controllers/WelcomeController.php on line 93
+[16-May-2015 18:04:48 UTC] PHP Parse error:  syntax error, unexpected 'if' (T_IF), expecting ']' in /home/marketingpublico/public_html/campaign/app/Http/Controllers/WelcomeController.php on line 163
+[16-May-2015 18:06:07 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ']' in /home/marketingpublico/public_html/campaign/app/Http/Controllers/WelcomeController.php on line 170
+[16-May-2015 18:06:09 UTC] PHP Parse error:  syntax error, unexpected ';', expecting ']' in /home/marketingpublico/public_html/campaign/app/Http/Controllers/WelcomeController.php on line 170
+[16-May-2015 19:33:48 UTC] PHP Parse error:  syntax error, unexpected '$quotes' (T_VARIABLE), expecting '(' in /home/marketingpublico/public_html/campaign/storage/framework/views/38804079a124257f5bbc398118063a80 on line 70
+[16-May-2015 19:33:50 UTC] PHP Parse error:  syntax error, unexpected '$quotes' (T_VARIABLE), expecting '(' in /home/marketingpublico/public_html/campaign/storage/framework/views/38804079a124257f5bbc398118063a80 on line 70
+[16-May-2015 19:34:09 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting '(' in /home/marketingpublico/public_html/campaign/storage/framework/views/38804079a124257f5bbc398118063a80 on line 72

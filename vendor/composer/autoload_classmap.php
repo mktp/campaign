@@ -6,7 +6,11 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'CreateClientsTable' => $baseDir . '/database/migrations/2015_05_14_221311_create_clients_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreateQuotecomputeclientsTable' => $baseDir . '/database/migrations/2015_05_14_152214_create_quotecomputeclients_table.php',
+    'CreateQuotemodelclientsTable' => $baseDir . '/database/migrations/2015_05_12_171218_create_quotemodelclients_table.php',
+    'CreateQuotemodelsTable' => $baseDir . '/database/migrations/2015_05_12_171218_create_quotemodels_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
@@ -388,6 +392,8 @@ return array(
     'PHP_Token_WHITESPACE' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_XOR_EQUAL' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
+    'QuotecomputesTableSeeder' => $baseDir . '/database/seeds/QuotecomputesTableSeeder.php',
+    'QuotemodelsTableSeeder' => $baseDir . '/database/seeds/QuotemodelsTableSeeder.php',
     'SebastianBergmann\\Comparator\\ArrayComparator' => $vendorDir . '/sebastian/comparator/src/ArrayComparator.php',
     'SebastianBergmann\\Comparator\\Comparator' => $vendorDir . '/sebastian/comparator/src/Comparator.php',
     'SebastianBergmann\\Comparator\\ComparisonFailure' => $vendorDir . '/sebastian/comparator/src/ComparisonFailure.php',

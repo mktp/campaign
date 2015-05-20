@@ -28,3 +28,4 @@ Route::get('which_client', 'WelcomeController@which_client');
 Route::post	('which_client_go', ['as' => 'which_client_go', 'uses' => 'WelcomeController@which_client_go']);
 Route::post	('save_quote', ['as' => 'save_quote', 'uses' => 'WelcomeController@save_quote']);
 Route::post	('store_quote', ['as' => 'store_quote', 'uses' => 'WelcomeController@store_quote']);
+Route::post	('save_quote_design', ['as' => 'save_quote_design', 'uses' => 'WelcomeController@save_quote_design']);

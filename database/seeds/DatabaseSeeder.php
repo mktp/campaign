@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder {
 		// $this->call('UserTableSeeder');
 		//$this->call('QuotemodelsTableSeeder');
 		$this->call('QuotecomputesTableSeeder');
+		//$this->call('QuotedesignsTableSeeder');
 	}
 
 }

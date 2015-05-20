@@ -8,6 +8,8 @@ use App\campaign\entities\Client;
 use App\campaign\entities\Quotemodelclient;
 use App\campaign\entities\Quotecomputeclient;
 use App\campaign\entities\Quotetotal;
+use App\campaign\entities\Quotedesign;
+use App\campaign\entities\Quotedesignclient;
 
 class WelcomeController extends Controller {
 
@@ -70,7 +72,7 @@ class WelcomeController extends Controller {
 			//"id" => 4,
 			"name" => $request->client
 		]);
-		$quote = Quotemodelclient::create([
+		$quotemodel = Quotemodelclient::create([
 			
 			//"id" => 4,
 			"model" => $request->q_hidden,
@@ -83,7 +85,7 @@ class WelcomeController extends Controller {
 			"name" => "Dominio",
 			"price" => $request->dominio,
 			"required" => 1,
-			"quotemodel" => $quote->id
+			"quotemodel" => $quotemodel->id
 		]);
 		$aggregate += $request->dominio;
         $compute = Quotecomputeclient::create([
@@ -92,7 +94,7 @@ class WelcomeController extends Controller {
         	"name" => "Hosting",
         	"price" => $request->hosting,
         	"required" => 1,
-			"quotemodel" => $quote->id
+			"quotemodel" => $quotemodel->id
         ]);
         $aggregate += $request->hosting;
         $compute = Quotecomputeclient::create([
@@ -101,7 +103,7 @@ class WelcomeController extends Controller {
         	"name" => "Mail",
 			"price" => $request->mail,
 			"required" => 1,
-			"quotemodel" => $quote->id
+			"quotemodel" => $quotemodel->id
         ]);
         $aggregate += $request->mail;
         $compute = Quotecomputeclient::create([
@@ -110,7 +112,7 @@ class WelcomeController extends Controller {
         	"name" => "Seguridad",
 			"price" => $request->seguridad,
 			"required" => 1,
-			"quotemodel" => $quote->id
+			"quotemodel" => $quotemodel->id
         ]);
         $aggregate += $request->seguridad;
         $compute = Quotecomputeclient::create([
@@ -119,7 +121,7 @@ class WelcomeController extends Controller {
         	"name" => "ComisionT",
         	"price" => $request->comisiont,
         	"required" => 1,
-			"quotemodel" => $quote->id
+			"quotemodel" => $quotemodel->id
         ]);
         $aggregate += $request->comisiont;
         $compute = Quotecomputeclient::create([
@@ -128,7 +130,7 @@ class WelcomeController extends Controller {
         	"name" => "Site",
         	"price" => $request->site,
         	"required" => 1,
-			"quotemodel" => $quote->id
+			"quotemodel" => $quotemodel->id
         ]);
         $aggregate += $request->site;
         $compute = Quotecomputeclient::create([
@@ -137,7 +139,7 @@ class WelcomeController extends Controller {
         	"name" => "Administracion",
         	"price" => $request->administracion,
         	"required" => 1,
-			"quotemodel" => $quote->id
+			"quotemodel" => $quotemodel->id
         ]);
         $aggregate += $request->administracion;
         $compute = Quotecomputeclient::create([
@@ -146,7 +148,7 @@ class WelcomeController extends Controller {
         	"name" => "SEO",
         	"price" => $request->seo,
         	"required" => 1,
-			"quotemodel" => $quote->id
+			"quotemodel" => $quotemodel->id
         ]);
         $aggregate += $request->seo;
         $compute = Quotecomputeclient::create([
@@ -155,7 +157,7 @@ class WelcomeController extends Controller {
         	"name" => "Analytics",
         	"price" => $request->analytics,
         	"required" => 1,
-			"quotemodel" => $quote->id
+			"quotemodel" => $quotemodel->id
         ]);
         $aggregate += $request->analytics;
         $compute = Quotecomputeclient::create([
@@ -164,7 +166,7 @@ class WelcomeController extends Controller {
         	"name" => "Estrategia",
         	"price" => $request->estrategia,
         	"required" => 1,
-			"quotemodel" => $quote->id
+			"quotemodel" => $quotemodel->id
         ]);
 
         	if ($request->add_SEM == 1) {
@@ -181,7 +183,7 @@ class WelcomeController extends Controller {
         	"name" => "SEM",
         	"price" => $mount,
         	"required" => 0,
-			"quotemodel" => $quote->id
+			"quotemodel" => $quotemodel->id
         ]);
         	if ($request->add_Mobile == 1) {
         	
@@ -197,7 +199,7 @@ class WelcomeController extends Controller {
         	"name" => "Mobile",
         	"price" => $mount,
         	"required" => 0,
-			"quotemodel" => $quote->id
+			"quotemodel" => $quotemodel->id
         ]);
         	if ($request->add_Web == 1) {
         	
@@ -213,7 +215,7 @@ class WelcomeController extends Controller {
         	"name" => "Web",
         	"price" => $mount,
         	"required" => 0,
-			"quotemodel" => $quote->id
+			"quotemodel" => $quotemodel->id
         ]);
         	if ($request->add_Mailchimp == 1) {
         	
@@ -229,14 +231,14 @@ class WelcomeController extends Controller {
         	"name" => "Mailchimp",
         	"price" => $mount,
         	"required" => 0,
-			"quotemodel" => $quote->id
+			"quotemodel" => $quotemodel->id
         ]);
 
 // TOTAL
 		$total = Quotetotal::create([
 			
 			//"id" => 4,
-			"modelclient" => $quote->id,
+			"modelclient" => $quotemodel->id,
 			"compute" => $aggregate,
 			"total" => $aggregate
 		]);
@@ -244,14 +246,20 @@ class WelcomeController extends Controller {
 		$donde = $request->quotecategory;
 		if ($donde == 1) {
 
-			/*$quotes = Quotemodel::all();
+			$quotes = Quotemodel::all();
 			$quotedesigns = array();
+			$many = 0;
 			foreach( $quotes as $quote ) {
 			
 				$quote_tmp = Quotedesign::where('quotemodel', '=', $quote->id)->get();
-				array_push($quotecomputes, $quote_tmp);
-			}*/
-			return view('design', compact('total'));
+				array_push($quotedesigns, $quote_tmp);
+				if ($many == 0) {
+				
+					$many = count($quote_tmp);
+				}
+
+			}
+			return view('design', compact('total', 'client', 'quotemodel', 'quotes', 'quotedesigns', 'many', 'total'));
 		} else {
 		
 			return view('which_client');
@@ -259,6 +267,57 @@ class WelcomeController extends Controller {
 		
 	}
 
+	public function save_quote_design(QuoteRequest $request)
+	{
+		//
+		//dd('Esta es la idol ' . $request->name);
+		$quotemodel = Quotemodelclient::find($request->quote);
+		$client = Client::find($request->client);
+		$mount = 0;
+		$aggregate = 0;
+
+		$i = 1;
+		do {
+
+			if ($request->{"add_" . $i} == 1) {
+        	
+        		$mount = $request->{"product_" . $i};
+        	} else {
+        	
+        		$mount = 0;
+        	}
+			$aggregate += $mount;
+			$design = Quotedesignclient::create([
+				
+				//"id" => "1",
+				"name" => $request->{"name_" . $i},
+				"price" => $mount,
+				"required" => 0,
+				"quotemodel" => $quotemodel->id
+			]);
+			$i++;
+		} while( $i <= $request->many );
+
+// TOTAL
+		$total = Quotetotal::find($request->total);
+		$total->update([
+			
+			//"id" => "1",
+			"design" => $aggregate,
+			"total" => $total->total + $aggregate,
+		]);
+
+		$donde = $request->quotecategory;
+		if ($donde == 1) { // TOTAL
+
+			return view('total', compact('total', 'client', 'quote'));
+		} else {
+		
+			return view('which_client');
+		}
+		
+	}
+	
 	public function which_client()
 	{
 		return view('which_client');

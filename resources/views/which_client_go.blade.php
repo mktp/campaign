@@ -82,6 +82,8 @@
 	
 			var selectBox = document.getElementById("quotemodel");
 			var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+			alert("calculo en " + text + " " + quotes[selectedValue - 1][product].price);
+
 			if ( $('#add_' + text).prop("checked") ) {
 			
 				total += quotes[selectedValue - 1][product].price;
@@ -116,19 +118,22 @@
 			total = 0;
 			
 			$("#product").empty();
+
 			for ( i = 0; i < quotes[selectedValue - 1].length; i++ ) {
 			
 				if (quotes[selectedValue - 1][i].required == 0) {
 				
 					if (quotes[selectedValue - 1][i].price > 0) {
 					
-						product = "<input type='checkbox' id='add_" + quotes[selectedValue - 1][i].name + "' onclick='changeTotal(\""  +  quotes[selectedValue - 1][i].name + "\"," + i + ");' checked/>";
+						product = "<input type='checkbox' id='add_" + quotes[selectedValue - 1][i].name + "' name='add_" + quotes[selectedValue - 1][i].name + "' value='1' onclick='changeTotal(\""  +  quotes[selectedValue - 1][i].name + "\"," + i + ");' checked />";
 						total += quotes[selectedValue - 1][i].price;
 						price = quotes[selectedValue - 1][i].price;
 					} else {
 
-						product = "<input type='checkbox' id='add_" + quotes[selectedValue - 1][i].name + "' onclick='changeTotal(\""  +  quotes[selectedValue - 1][i].name + "\"," + i + ");' />";
+						alert(quotes[model][i].name + ": " + quotes[model][i].price);
+						product = "<input type='checkbox' id='add_" + quotes[selectedValue - 1][i].name + "' name='add_" + quotes[selectedValue - 1][i].name + "' value='0' onclick='changeTotal(\""  +  quotes[selectedValue - 1][i].name + "\"," + i + ");' />";
 						price = quotes[model][i].price;
+						quotes[selectedValue - 1][i].price = quotes[model][i].price;
 					}
 				} else {
 				
@@ -158,10 +163,13 @@
 
 				{!! Form::label('Cotizacion para ' . $clients[0]->name) !!}
 
-				{!! Form::open(array('route' => 'current_quote', 'class' => 'form')) !!}
+				{!! Form::open(array('route' => 'store_quote', 'class' => 'form')) !!}
 
 					<input type='hidden' id='q_hidden' name='q_hidden'/>
 					<input type='hidden' id='q_model' name='q_model'/>
+					<input type='hidden' id='q_compute' name='q_compute' value='<?php echo $quotes[0]->id; ?>'/>
+					<input type='hidden' id='client' name='client' value='<?php echo $clients[0]->name; ?>'/>
+					
 					<select id='quotemodel' onchange="changeQuote();">
 						<option value=1 selected><?php echo $clients[0]->name; ?></option>
 						<option value=2>Pymes</option>
@@ -184,12 +192,8 @@
 					
 					</div>
 
-					{!! Form::text('client', null, 
-						array('required', 
-							  'class'=>'form-control', 
-							  'placeholder'=>'Escriba el nombre del cliente')) !!}
 					<div class="form-group">
-						{!! Form::submit('Go', 
+						{!! Form::submit('Guardar', 
 						  array('class'=>'btn btn-primary')) !!}
 					</div>
 				{!! Form::close() !!}

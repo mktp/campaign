@@ -1,4 +1,3 @@
-
 <html>
 	<head>
 		<title>Laravel</title>
@@ -42,42 +41,37 @@
 
 <!-- JQUERY. SI NO SE AGREGA ANTES DE LAS DEMAS, NO MUESTRA LOS DIALOGOS. -->
 		<script src="api/jquery/jquery.min.js"></script>
+		<script src="api/bootstrap/bootstrap.min.js"></script>
 
-<script type="text/javascript">
+<!-- BOOTSTRAP -->	
+		<link rel="stylesheet" href="api/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="api/bootstrap/css/bootstrap-responsive.css">
+		<link rel="stylesheet" href="api/bootstrap/css/docs.css">
+		<link rel="stylesheet" href="api/bootstrap/css/prettify.css">
 
-	function changeMy() {
-	
-		//alert("el check quedo en " + $('#do_sem').prop("checked"));
-		if ( $('#do_sem').prop("checked") ) {
+<!-- javascript -->	
+		<script type="text/javascript">
+
+		</script>
 		
-			$('#l_total').html( parseInt($('#domain').val()) + parseInt($('#server').val()) + parseInt($('#mail').val()) + parseInt($('#sem').val()) );
-		} else {
-		
-			$('#l_total').html( parseInt($('#domain').val()) + parseInt($('#server').val()) + parseInt($('#mail').val()) );		
-		}
-	}
-</script>
-
 
 		<div class="container">
 			<div class="content">
-				<div class="title">Laravel 5 4 William</div>
+
+				<div class="title">Cotizador interactivo</div>
 				<div class="quote">{{ Inspiring::quote() }}</div>
 
-								<div>
-									<input type="hidden" id="domain" value="64000">
-									<input type="hidden" id="server" value="25000">
-									<input type="hidden" id="mail" value="6000">
-									<input type="hidden" id="sem" value="1000000">
-									<label id="l_domain">Productos: $64000</label><br/>
-									<label id="l_server">Servidor: $25000</label><br/>
-									<label id="l_mail">Correo: $6000</label><br/>
-									<input type="checkbox" id="do_sem" onclick="changeMy();"/>
-									SEM: $1000000<br/>
-									<label id="l_total"><?php echo $total; ?></label>
-									
+				{!! Form::open(array('route' => 'which_client_go', 'class' => 'form')) !!}
 
-								</div>
+					{!! Form::text('client', null, 
+						array('required', 
+							  'class'=>'form-control', 
+							  'placeholder'=>'Esta es la vista de diseño y el total es ' . $total->total)) !!}
+					<div class="form-group">
+						{!! Form::submit('Go', 
+						  array('class'=>'btn btn-primary')) !!}
+					</div>
+				{!! Form::close() !!}
 
 			</div>
 		</div>

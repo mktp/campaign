@@ -137,9 +137,10 @@
 				<div class="title">Cotizador interactivo</div>
 				<div class="quote">{{ Inspiring::quote() }}</div>
 
-				{!! Form::open(array('route' => 'current_quote', 'class' => 'form')) !!}
+				{!! Form::open(array('route' => 'save_quote', 'class' => 'form')) !!}
 
 					<input type='hidden' id='q_hidden' name='q_hidden'/>
+					<input type='hidden' id='q_compute_total' name='q_compute_total' value='20'/>
 					<select id='quotemodel' onchange="changeQuote();">
 						<option value=1>Pymes</option>
 						<option value=2>Grandes</option>
@@ -166,10 +167,16 @@
 							  'class'=>'form-control', 
 							  'placeholder'=>'Escriba el nombre del cliente')) !!}
 					<div class="form-group">
-						{!! Form::submit('Go', 
+						<select id='quotecategory' name='quotecategory'>
+							<option value=1>Diseño</option>
+							<option value=2>BTL</option>
+						</select>
+
+						{!! Form::submit('Crear cotizacion', 
 						  array('class'=>'btn btn-primary')) !!}
 					</div>
 				{!! Form::close() !!}
+
 
 			</div>
 		</div>
